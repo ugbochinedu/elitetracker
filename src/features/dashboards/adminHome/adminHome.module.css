@@ -1,0 +1,12 @@
+.image{
+    background-image: url(../../../assests/images/timeandattendance.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    background-position: right;
+    width: 77%;
+}
+
+.main{
+    display: flex;
+}

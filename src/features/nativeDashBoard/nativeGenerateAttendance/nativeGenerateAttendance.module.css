@@ -1,0 +1,114 @@
+.main{
+    display: flex;
+}
+
+.innerContainer{
+    margin: 70px;
+    /* display: flex; */
+    justify-content: space-between;
+    flex-direction: row;
+    width: 900px;
+}
+
+.innerContainer p{
+    font-size:26px;
+    font-weight: 700;
+}
+
+.formInput{
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 650px;
+}
+
+.input{
+    height: 50px;
+    width: 160px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px 0px;
+    border: none;
+    outline: none;
+    padding: 0px 30px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.btn{
+    height: 50px;
+    width: 120px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px 0px;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    padding: 0px 8px ;
+}
+
+.btn{
+    background: rgb(247, 46, 46);
+    color: white;
+    cursor: pointer;
+}
+
+.viewTable{
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0 20px;
+    margin: 51px 5px 10px 19px;
+    height: 50vh;
+    width: 70%;
+    border: 1px solid red;
+    background-color: white;
+    border-radius: 10px;
+}
+.viewTable th,
+.viewTable td{
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+.viewTable th{
+    background-color: red;
+    color: white;
+}
+.viewTable tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+.viewTable tr:nth-child(odd){
+    background-color: white;
+}
+
+.flexPagenation{
+    display: flex;
+    list-style: none;
+    width: 600px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.flexPagenation a{
+    text-decoration: none;
+}
+
+.flexPagenation li{
+    margin-left: 20px;
+}
+
+.prePage{
+    padding: 2px 7px;
+    color: rgb(0, 0, 0);
+    font-weight: 700;
+    background: rgba(236, 235, 235, 0.847);
+    box-shadow: 0px 0px 0px 2px gainsboro;
+}
+
+.pages{
+    padding: 2px 7px;
+    color: rgb(0, 0, 0);
+    font-weight: 700;
+    background: rgba(236, 235, 235, 0.847);
+    box-shadow: 0px 0px 0px 2px gainsboro;
+}

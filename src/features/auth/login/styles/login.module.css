@@ -1,0 +1,181 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.formContainer{
+    width: 75%;
+    height: 65vh;
+    margin: auto;
+}
+
+.form input{
+    width:100%;
+    height: 60px;
+    margin-bottom: 30px;
+    outline: none;
+    background-color: rgba(209, 211, 211, 0.584);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.form input::placeholder{
+    font-size: 22px;
+}
+
+.form label{
+    font-size: 25px;
+}
+
+.form span{
+    color: red;
+}
+
+.loginText{
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+    color: rgb(247,46,46);;
+}
+
+.registerBtn{
+    margin-top: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    color: rgb(247,46,46);;
+    text-decoration: underline;
+    background-color: white;
+    padding-bottom: 20px;
+}
+
+.flexBtn{
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    width: 250px;
+    justify-content: space-between;
+    color: white;
+    /* margin-left: 17px; */
+    /* height: 70px; */
+    /* box-shadow: 0 0 2px 1px gray; */
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+}
+
+.error{
+    color: red;
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.flexLogoText{
+    display: flex;
+    width: 250px;
+    align-items: center;
+    margin-bottom:110px;
+}
+
+.flexLogoText h1{
+    color: rgb(247,46,46);
+}
+
+@media screen and (min-width: 1300px) {
+  .mainContainer{
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+    }
+    .form input{
+        font-size: 25px;
+    }
+}
+
+@media screen and (min-width: 830px) and (max-width: 1299px){
+    .formContainer{
+        width: 75%;
+        height: 85vh;
+        margin: auto;
+    }
+    .mainContainer{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .form input{
+        width:100%;
+        height: 50px;
+        margin-bottom: 30px;
+        font-size: 20px;
+    }
+}
+
+@media screen and  (max-width: 829px){
+    .formContainer{
+        width: 75%;
+        height: 40vh;
+        padding-top: 20px ;
+    }
+    .form input{
+        width:100%;
+        height: 40px;
+        margin-bottom: 15px;
+        font-size: 20px;
+    }
+    .form label{
+        font-size: 20px;
+    }
+    .loginText{
+        font-size: 25px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    .form input::placeholder{
+        font-size: 16px;
+    }
+    .login{
+        font-size: 18px;
+        margin-top: 10px;
+    }
+}
+
+
+.button{
+    width: 100%;
+    height: 58px;
+    font-size: 30px;
+    background: rgb(247,46,46);
+    border-radius: 5px;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.button:hover{
+    background: rgb(228,229,229);
+    color: rgb(247,46,46);
+}
+
+
+@media screen and (min-width: 680px) and (max-width: 1024px){
+    .button{
+        height: 45px;
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 681px){
+    .button{
+    width: 100%;
+    height: 45px;
+    font-size: 18px;
+    }
+}

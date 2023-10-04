@@ -1,0 +1,58 @@
+.main{
+    display: flex;
+}
+
+.innerContainer{
+    margin: 70px;
+    width: 500px;
+}
+
+.inputText{
+    height: 50px;
+    width: 120px;
+    font-size: 18px;
+    font-weight: 700;
+    padding-left: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px 0px;
+    border: none;
+    outline: none;
+}
+
+.radioBtnContainer{
+    display: flex;
+    margin-top: 35px;
+}
+
+.check{
+    display: flex;
+    height: 25px;
+    padding: 12px 10px 0px 15px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.button{
+    width: 120px;
+    height: 45px;
+    background: rgb(247,46,46);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.button:hover{
+    color: rgb(247,46,46);
+    background: rgb(228, 227, 227);
+    font-weight: 800;
+}
+
+.flexBtn{
+    display: flex;
+    margin-top: 50px;
+    width: 300px;
+    justify-content: space-between;
+}
