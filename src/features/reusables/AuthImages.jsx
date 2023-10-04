@@ -11,7 +11,7 @@ const AuthImage = ()=> {
             {/* <h2>{semiImage}</h2> */}
             <img src={semiImage} alt="Semicolon image" />
           </div>
-          {/* <h1>SEMICOLON</h1> */}
+         
         </div>
       </div>
     );
