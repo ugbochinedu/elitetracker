@@ -18,60 +18,63 @@ export const getIpAddress = async () => {
 //   return data.IPv4
 // }
 
-import React, { useEffect } from "react";
+// import React, { useEffect } from "react";
 
 
-export function UUID() {
-  useEffect(() => {
-    // Check if the UUID exists in local storage
-    const storedUUID = localStorage.getItem("uuid");
-    const userIp = getIpAddress();
+// export function UUID() {
 
-    if (storedUUID) {
-      // If the UUID is already in local storage, send it to the server
-      const uniqueCode = userIp + storedUUID;
-      console.log(uniqueCode)
-      sendUUIDToServer(uniqueCode);
-    } else {
-      // If the UUID doesn't exist, generate a new one
-      const newUUID = uuidv4();
+//   const [error, setError] = useState(null);
 
-      // Store the new UUID in local storage
-      localStorage.setItem("uuid", newUUID);
-      const uniqueCode = userIp + storedUUID;
-      console.log(uniqueCode);
-      // Send the new UUID to the server
-      sendUUIDToServer(uniqueCode);
-    }
-  }, []);
+//   useEffect(() => {
+//     // Check if the UUID exists in local storage
+//     const storedUUID = localStorage.getItem("uuid");
+//     const userIp = getIpAddress();
 
-  const sendUUIDToServer = (uuid) => {
-    // Replace this with your server communication logic 
-    fetch("your-server-endpoint", {
-      method: "POST",
-         headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ uuid }),
-    })
+//     if (storedUUID) {
+//       // If the UUID is already in local storage, send it to the server
+//       const uniqueCode = userIp + storedUUID;
+//       console.log(uniqueCode)
+//       sendUUIDToServer(uniqueCode);
+//     } else {
+//       // If the UUID doesn't exist, generate a new one
+//       const newUUID = uidv4();
 
-      .then((response) => {
-        if (response.ok) {
-          console.log("UUID sent successfully")
-        } else {
-          throw new Error("Network Error");
-        }
-      })
-      .catch((error) => {
-         console.log(error);
+//       // Store the new UUID in local storage
+//       localStorage.setItem("uuid", newUUID);
+//       const uniqueCode = userIp + storedUUID;
+//       console.log(uniqueCode);
+//       // Send the new UUID to the server
+//       sendUUIDToServer(uniqueCode);
+//     }
+//   }, []);
 
-         if (error.message === "Network Error") {
-           setNetworkError(error.message);
-         } else {
-           setError(error.response.data.data);
-         }
-      });
-  };
+//   const sendUUIDToServer = (uuid) => {
+//     // Replace this with your server communication logic 
+//     fetch("your-server-endpoint", {
+//       method: "POST",
+//          headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({ uuid }),
+//     })
 
-  // return <div className="App">{/* Your React application content */}</div>;
-}
+//       .then((response) => {
+//         if (response.ok) {
+//           console.log("UUID sent successfully")
+//         } else {
+//           throw new Error("Network Error");
+//         }
+//       })
+//       .catch((error) => {
+//          console.log(error);
+
+//          if (error.message === "Network Error") {
+//            setError(error.message);
+//          } else {
+//            setError(error.response.data.data);
+//          }
+//       });
+//   };
+
+//   // return <div className="App">{/* Your React application content */}</div>;
+// }

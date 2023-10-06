@@ -6,7 +6,7 @@ import classes from "./styles/signUp.module.css";
 import { useNavigate } from "react-router-dom";
 import Card from "../../UI/card/Card";
 import semiImage from "../../../assests/images/semi.png";
-import { getIpAddress, UUID} from "../../../utils";
+import { getIpAddress} from "../../../utils";
 
 
 const SignUp = () => {
@@ -35,12 +35,12 @@ const SignUp = () => {
 
   apiCall();
 
-   function uniqueUUID() {
-     const uniqueCode = UUID();
-     console.log("unique addrress -> ", uniqueCode);
-   }
+  //  function uniqueUUID() {
+  //    const uniqueCode = UUID();
+  //    console.log("unique addrress -> ", uniqueCode);
+  //  }
 
-   uniqueUUID();
+  //  uniqueUUID();
 
   // const getUserIpAddress = () => {
   //   fetch(
