@@ -7,7 +7,7 @@ const ConfirmResetPassword = () => {
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setPasswordError] = useState("")
+  const [error, setError] = useState("")
 
  
   const submitHandler = async (e) =>{
@@ -16,7 +16,7 @@ const ConfirmResetPassword = () => {
     if (password === confirmPassword) {
       setConfirmPassword(confirmPassword);
     } else {
-      setPasswordError("Your password doesn't match");
+      setError("Your password doesn't match");
       return;
     }
 
@@ -33,12 +33,12 @@ const ConfirmResetPassword = () => {
     //   );
     //   console.log(response)
     //   if(response.status === 200){
-            // if (response.data.semicolonEmail.includes("native")) {
-            //   console.log("I am here");
-            //   navigate("/native/takeAttendance");
-            // } else {
-            //   navigate("/adminHome");
-            // }
+    // if (response.data.semicolonEmail.includes("native")) {
+    //   console.log("I am here");
+    //   navigate("/resetPassword");
+    // } else {
+    //   navigate("/adminHome");
+    // }
     //   } else {
     //     throw new Error("Network Error");
     //   }

@@ -6,7 +6,8 @@ import classes from "./styles/signUp.module.css";
 import { useNavigate } from "react-router-dom";
 import Card from "../../UI/card/Card";
 import semiImage from "../../../assests/images/semi.png";
-import { getIpAddress } from "../../../utils";
+import { getIpAddress, UUID} from "../../../utils";
+
 
 const SignUp = () => {
   // const initialValue = {
@@ -23,7 +24,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [scv, setScv] = useState("");
-  // const [verifiedPassword, setVerifyPassword] = useState("");
+  const [detail, setDetail] = useState("");
 
   const navigate = useNavigate();
 
@@ -32,8 +33,58 @@ const SignUp = () => {
     console.log("Ip addrress -> ", ipAddress);
   }
 
-  // console.log("hfdjhsfdhjshg");
   apiCall();
+
+   function uniqueUUID() {
+     const uniqueCode = UUID();
+     console.log("unique addrress -> ", uniqueCode);
+   }
+
+   uniqueUUID();
+
+  // const getUserIpAddress = () => {
+  //   fetch(
+  //     "https://geolocation-db.com/json/fd18cb60-5f5a-11ee-87d3-bd3f0d7c4f89"
+  //   )
+  //     .then((response) => response.json())
+  //     .then((data) => setDetail(data));
+  // };
+
+  // getUserIpAddress();
+
+    const getUserIpAddress = () => {
+    fetch("https://api.ipify.org")
+      .then((response) => response.text())
+      .then((response) => console.log("new response", response))
+      .then((ip) => setDetail("first ip", ip))
+      .then((ip) => console.log("new Ip", ip))
+      .catch((err) => console.log(err));
+  };
+
+  getUserIpAddress();
+
+
+
+  console.log(detail);
+  // console.log("new Ip", detail.IPv4);
+
+  // async function callApi() {
+  //   const userIp = await getUserIpAddress();
+  //   console.log("New Ip addrress -> ", userIp);
+  // }
+
+  // callApi();
+
+  // console.log("hfdjhsfdhjshg");
+  
+
+  // const getUserIp = async () =>{
+  //   const ip = await axios.get("https://ipapi.co/json")
+  //   console.log("new ip",ip.data)
+  //   console.log("new ip", ip.data.ip);
+  // }
+
+  // getUserIp()
 
   // const validatePassword = () =>{
   //   if(confirmPassword === password){
@@ -62,6 +113,7 @@ const SignUp = () => {
 
     setScreenWidth(screenWidth);
     setScreenHeight(screenHeight);
+    
   }, []);
 
   const onSumbitHandler = async (e) => {
@@ -71,7 +123,7 @@ const SignUp = () => {
       setConfirmPassword(confirmPassword);
       // console.log(password)
       // console.log("final pass",confirmPassword)
-      // console.log(verifiedPassword)
+      // console.log(verifiedPassword)    
     } else {
       setPasswordError("Your password doesn't match");
       return;

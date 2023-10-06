@@ -3,7 +3,8 @@ import Button from "../../UI/button/Button";
 import NativeSideBar from "../nativeSideBar/nativeSideBar";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { getIpAddress } from "../../../utils";
+// import { getIpAddress} from "../../../utils";
+import { v4 as uuidv4 } from "uuid";
 
 const TakeAttendance = () => {
   const [firstName, setFirstName] = useState("");
@@ -16,13 +17,10 @@ const TakeAttendance = () => {
   const [screenWidth, setScreenWidth] = useState(0);
   const [screenHeight, setScreenHeight] = useState(0);
 
+  
+
   useEffect(() => {
-    async function apiCall() {
-      const ipAddress = await getIpAddress();
-      setIpAddress(ipAddress);
-      console.log("Ip addrress -> ", ipAddress);
-    }
-    apiCall();
+
     const firstNameWithQoute = sessionStorage.getItem("firstName");
     // const firstName = sessionStorage.getItem("firstName");
     const firstName = firstNameWithQoute.slice(1, -1);
@@ -31,6 +29,100 @@ const TakeAttendance = () => {
 
     setFirstName(firstName);
   }, []);
+
+   
+  const getIpAddress = async () => {
+    try {
+      const response = await axios.get("https://api.ipify.org?format=json");
+      console.log("ip adddd ", response.data.ip);
+      return response.data.ip;
+    } catch (error) {
+      console.error("Error fetching IP address:", error);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    async function apiCall() {
+      const ipAddress = await getIpAddress();
+      setIpAddress(ipAddress);
+      console.log("Ip addrress -> ", ipAddress);
+      const storedUUID = localStorage.getItem("uuid");
+
+      if (storedUUID) {
+        const uniqueCode = ipAddress + storedUUID;
+        console.log("this is my unique code", uniqueCode);
+        setIpAddress(uniqueCode)
+        // sendUUIDToServer(uniqueCode);
+      } else {
+        const newUUID = uuidv4();
+
+        localStorage.setItem("uuid", newUUID);
+        const uniqueCode = ipAddress + newUUID;
+        setIpAddress(uniqueCode);
+        console.log(uniqueCode);
+       
+        // sendUUIDToServer(uniqueCode);
+      }
+    }
+
+    apiCall()
+   
+  }, []);
+
+  // const sendUUIDToServer = async (uuid) => {
+  //   try {
+  //     const response = await fetch("your-server-endpoint", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ uuid }),
+  //     });
+
+  //     if (response.status === 200) {
+  //       console.log("UUID sent successfully");
+  //     } else {
+  //       throw new Error("Network Error");
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+
+  //     if (error.message === "Network Error") {
+  //       setError(error.message);
+  //     } else {
+  //       setError(error.response.data.data || "Unknown Error");
+  //     }
+  //   }
+  // };
+
+
+  // const sendUUIDToServer = async (uuid) => {
+  //   Replace this with your server communication logic
+  //   fetch("your-server-endpoint", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ uuid }),
+  //   })
+  //     .then((response) => {
+  //       if (response.status === 200) {
+  //         console.log("UUID sent successfully");
+  //       } else {
+  //         throw new Error("Network Error");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+
+  //       if (error.message === "Network Error") {
+  //         setError(error.message);
+  //       } else {
+  //         setError(error.response.data.data);
+  //       }
+  //     });
+  // };
 
   useEffect(() => {
     setInterval(() => {
@@ -60,10 +152,10 @@ const TakeAttendance = () => {
   }, []);
 
   const onClickHandler = async (e) => {
-    // e.preventDefault;
+    e.preventDefault;
 
     // setAttendanceStatus("PRESENT");
-    const jwtToken = sessionStorage.getItem("jwtToken");
+    // const jwtToken = sessionStorage.getItem("jwtToken");
     const email = sessionStorage.getItem("semicolconEmail");
 
     // console.log(attendanceStatus)
@@ -96,7 +188,7 @@ const TakeAttendance = () => {
 
         console.log("Data sent successfully:", response.data);
         console.log("response", response.status);
-        setMessage(response.data.data);
+        setMessage(response.data.message);
       } else {
         throw new Error("Network Error");
       }

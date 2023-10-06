@@ -15,7 +15,7 @@
 
 .logo img {
     width: 300px;
-    height: 70px;
+    height: 45px;
 }
 
 .sideBar{
@@ -33,6 +33,7 @@
 .sideBarItems{
     display: grid;
     grid-template-rows: 15% 15% 15% 15% 40%;
+    width: inherit;
 }
 
 .Link {
@@ -81,4 +82,45 @@
     color: white;
     font-weight: 700;
     width: 85%;
+}
+
+@media screen and (max-width: 1250px) {
+    .sideBar{
+        width: 25%;
+        background-color: rgb(255,255,255);
+        height: 680px;
+        color:  rgb(247,46,46);
+        box-shadow: 0 0 5px 5px rgb(202,202 ,202 );
+        display:grid;
+        grid-template-rows: 15% 80%;
+        row-gap: 40px;
+        padding-top: 5px;
+    }
+}
+
+@media screen and (min-width: 700px) and (max-width: 1240px){
+    .sideBar{
+        width: 30%;
+        background-color: rgb(255,255,255);
+        height: 680px;
+        color:  rgb(247,46,46);
+        box-shadow: 0 0 5px 5px rgb(202,202 ,202 );
+        display:grid;
+        grid-template-rows: 15% 80%;
+        row-gap: 40px;
+        padding-top: 5px;
+    }
+    .Link:hover{
+        background-color: rgb(247,46,46);
+        color: white;
+        font-weight: 700;
+        width: inherit;
+    }
+
+    .LinkLogout:hover{
+        background-color: rgb(247,46,46);
+        color: white;
+        font-weight: 700;
+        width: 75%;
+    }
 }

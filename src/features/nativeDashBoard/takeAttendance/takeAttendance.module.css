@@ -55,15 +55,34 @@
     font-weight: 800;
 } */
 
-/* @media screen and (min-width: 900px){
-   .flex{
-        display: flex;
+@media screen and (min-width: 700px) and (max-width: 1240px){
+
+    .firstContainer{
+        width: 415px;
+        height: 300px;
+        margin: auto;
+        box-shadow: 0px 0px 5px 1px rgb(218, 217, 217);
+        text-align: center;
+        /* margin-top: -550px; */
+    }
+
+    .main{
+        width: 95vw;
+        height: 500px;
+    }
+
+    .main h1{
+        font-size: 25px;
+    }
+
+    .time{
+        font-size: 22px;
     }
 
 }
 
 
-@media screen and (max-width: 681px){
+@media screen and (max-width: 691px){
    .firstContainer{
         width: 350px;
         height: 300px;
@@ -81,6 +100,6 @@
     .main h1{
         font-size: 25px;
     }
-} */
+}
 
 
