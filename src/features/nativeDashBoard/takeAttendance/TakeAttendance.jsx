@@ -16,6 +16,7 @@ const TakeAttendance = () => {
 
   const [screenWidth, setScreenWidth] = useState(0);
   const [screenHeight, setScreenHeight] = useState(0);
+  const [ipAddressConcat, setIpAddressConcat] = useState("")
 
   
 
@@ -52,14 +53,14 @@ const TakeAttendance = () => {
       if (storedUUID) {
         const uniqueCode = ipAddress + storedUUID;
         console.log("this is my unique code", uniqueCode);
-        setIpAddress(uniqueCode)
+        setIpAddressConcat(uniqueCode)
         // sendUUIDToServer(uniqueCode);
       } else {
         const newUUID = uuidv4();
 
         localStorage.setItem("uuid", newUUID);
         const uniqueCode = ipAddress + newUUID;
-        setIpAddress(uniqueCode);
+        setIpAddressConcat(uniqueCode);
         console.log(uniqueCode);
        
         // sendUUIDToServer(uniqueCode);
@@ -158,7 +159,7 @@ const TakeAttendance = () => {
     // const jwtToken = sessionStorage.getItem("jwtToken");
     const email = sessionStorage.getItem("semicolconEmail");
 
-    // console.log(attendanceStatus)
+    console.log("sent ipAddress",ipAddressConcat);
 
     const userDetails = {
       // attendanceStatus: attendanceStatus,
@@ -166,7 +167,8 @@ const TakeAttendance = () => {
       semicolonEmail: email,
       screenWidth: screenWidth,
       screenHeight: screenHeight,
-      ipAddress: ipAddress
+      ipAddress: ipAddress,
+      ipAddressConcat: ipAddressConcat
     };
 
     // const headers = {
