@@ -45,7 +45,7 @@ function App() {
         </Route>
         <Route path ="/confirmationCode" element ={<ConfirmForgottenPasswordCode/>}/>
         <Route path="/" element={<Login/>} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/Signup" element={<SignUp />} />
         <Route path="/forgottenPassword" element={<ForgottenPassword/>}/>   
         <Route path="/resetPassword" element={<ConfirmResetPassword/>}/>
       </Routes>
