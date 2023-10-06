@@ -195,7 +195,7 @@ const Login = () => {
  
 
   const onClickHandler = () => {
-    navigate("/Signup");
+    navigate("/signup");
   };
 
   return (
