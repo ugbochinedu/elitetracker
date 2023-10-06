@@ -71,11 +71,11 @@
     font-weight: bold;
 }
 .viewTable th{
-    background-color: red;
-    color: white;
+    background-color: white;
+    color: black;
 }
 .viewTable tr:nth-child(even){
-    background-color: #f2f2f2;
+    background-color: #e5e3e3;
 }
 .viewTable tr:nth-child(odd){
     background-color: white;

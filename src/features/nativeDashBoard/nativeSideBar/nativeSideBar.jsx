@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import semiImage from "../../../assests/images/semi.png";
+import semiImage from "../../../assests/images/semocolonLogo.jpg";
 import classes from './nativeSideBar.module.css'
 import {faUserCheck, faClockRotateLeft, faRightFromBracket, faChartSimple, faComputer} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -10,7 +10,7 @@ const NativeSideBar = () => {
     <div className={classes.sideBar}>
       <div className={classes.logo}>
         <img src={semiImage} alt="Semicolon image" />
-        <h1>SEMICOLON</h1>
+        {/* <h1>SEMICOLON</h1> */}
       </div>
       <div className={classes.sideBarItems}>
         <div className={classes.linkContainer}>

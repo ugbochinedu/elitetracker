@@ -37,13 +37,13 @@ function App() {
           <Route path="/generateCohortAttendanceReport" element={<GenerateCohortAttendance/>}/>
           <Route path="/cohortAttendance" element={<DisableNativesAttendance/>}/>
           <Route path="/nativeAttendance" element={<EnableNativesAttendance/>}/>          
-          <Route path ="/confirmationCode" element ={<ConfirmForgottenPasswordCode/>}/>
           <Route path="/removeNative" element={<RemoveNative/>} />
           <Route path="/native/takeAttendance" element={<TakeAttendance/>} />
           <Route path="/generateNativeAttendance" element={<NativeGenerateAttendanceReport/>} />
           <Route path="/resetDevice" element={<ResetDeviceForm/>} />   
           <Route path= "/attendanceInGraph" element={<AttendanceInGraph/>} />
         </Route>
+        <Route path ="/confirmationCode" element ={<ConfirmForgottenPasswordCode/>}/>
         <Route path="/" element={<Login/>} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/forgottenPassword" element={<ForgottenPassword/>}/>   

@@ -125,7 +125,7 @@ import { useNavigate, Link } from "react-router-dom";
 // import semiImage from "../../../assests/images/semi.png";
 import axios from "axios";
 
-const Login = (props) => {
+const Login = () => {
   const initialValue = {
     email: "",
     password: "",
