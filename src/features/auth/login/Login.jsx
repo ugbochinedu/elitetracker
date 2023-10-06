@@ -181,6 +181,8 @@ const Login = () => {
       console.log(error)
       
       if(error.message === "Network Error"){
+         console.log(error);
+          console.log(error.message);
         setNetworkError(error.message);
       }else{
         setError(error.response.data.data);
@@ -195,7 +197,7 @@ const Login = () => {
  
 
   const onClickHandler = () => {
-    navigate("/Signup");
+    navigate("/signup");
   };
 
   return (
