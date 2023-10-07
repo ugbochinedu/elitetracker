@@ -16,22 +16,18 @@ const TakeAttendance = () => {
 
   const [screenWidth, setScreenWidth] = useState(0);
   const [screenHeight, setScreenHeight] = useState(0);
-  const [ipAddressConcat, setIpAddressConcat] = useState("")
-
-  
+  const [ipAddressConcat, setIpAddressConcat] = useState("");
 
   useEffect(() => {
-
     const firstNameWithQoute = sessionStorage.getItem("firstName");
     // const firstName = sessionStorage.getItem("firstName");
     const firstName = firstNameWithQoute.slice(1, -1);
     // const firstName = firstNameWithQoute.replace(/"/g,"");
-    console.log(firstName)
+    console.log(firstName);
 
     setFirstName(firstName);
   }, []);
 
-   
   const getIpAddress = async () => {
     try {
       const response = await axios.get("https://api.ipify.org?format=json");
@@ -53,7 +49,7 @@ const TakeAttendance = () => {
       if (storedUUID) {
         const uniqueCode = ipAddress + storedUUID;
         console.log("this is my unique code", uniqueCode);
-        setIpAddressConcat(uniqueCode)
+        setIpAddressConcat(uniqueCode);
         // sendUUIDToServer(uniqueCode);
       } else {
         const newUUID = uuidv4();
@@ -62,13 +58,12 @@ const TakeAttendance = () => {
         const uniqueCode = ipAddress + newUUID;
         setIpAddressConcat(uniqueCode);
         console.log(uniqueCode);
-       
+
         // sendUUIDToServer(uniqueCode);
       }
     }
 
-    apiCall()
-   
+    apiCall();
   }, []);
 
   // const sendUUIDToServer = async (uuid) => {
@@ -96,7 +91,6 @@ const TakeAttendance = () => {
   //     }
   //   }
   // };
-
 
   // const sendUUIDToServer = async (uuid) => {
   //   Replace this with your server communication logic
@@ -158,17 +152,25 @@ const TakeAttendance = () => {
     // setAttendanceStatus("PRESENT");
     // const jwtToken = sessionStorage.getItem("jwtToken");
     const email = sessionStorage.getItem("semicolconEmail");
+    const fiftyOneDegrees = "AQRmWD6-Ownn-OvF20g";
 
-    console.log("sent ipAddress",ipAddressConcat);
+    console.log("sent ipAddress", ipAddressConcat);
+    const date = new Date().toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    });
 
     const userDetails = {
       // attendanceStatus: attendanceStatus,
       // jwtToken: jwtToken,
+      fiftyOneDegrees: fiftyOneDegrees,
+      attendanceDate: date,
       semicolonEmail: email,
       screenWidth: screenWidth,
       screenHeight: screenHeight,
       ipAddress: ipAddress,
-      ipAddressConcat: ipAddressConcat
+      ipAddressConcat: ipAddressConcat,
     };
 
     // const headers = {
@@ -181,7 +183,7 @@ const TakeAttendance = () => {
     try {
       const response = await axios.post(
         "https://elitestracker-production.up.railway.app/api/v1/natives/takeAttendance",
-        userDetails,
+        userDetails
         // { headers }
       );
 
@@ -210,10 +212,10 @@ const TakeAttendance = () => {
       // console.log(error);
     }
 
-    setTimeout(()=>{
+    setTimeout(() => {
       setError(false);
       setMessage(false);
-    }, 5000)
+    }, 5000);
   };
 
   // useEffect(() => {

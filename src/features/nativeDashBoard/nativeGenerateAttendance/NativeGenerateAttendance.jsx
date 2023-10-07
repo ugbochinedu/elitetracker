@@ -3,11 +3,11 @@ import React, { useState } from "react";
 import NativeSideBar from "../nativeSideBar/nativeSideBar";
 import classes from "./nativeGenerateAttendance.module.css";
 import Button from "../../UI/button/Button";
+import axios from "axios";
 // import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
 
 const NativeGenerateAttendanceReport = () => {
- 
   const attendanceReport = [
     {
       serialNumber: "1",
@@ -71,75 +71,95 @@ const NativeGenerateAttendanceReport = () => {
     },
   ];
 
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 5;
   const lastIndex = currentPage * recordsPerPage;
   const firstIndex = lastIndex - recordsPerPage;
-  const records = attendanceReport.slice(firstIndex, lastIndex);
-  const npage = Math.ceil(attendanceReport.length / recordsPerPage)
-  const numbers = [...Array(npage + 1).keys()].slice(1)
+  // const records = attendanceReport.slice(firstIndex, lastIndex);
+  const npage = Math.ceil(attendanceReport.length / recordsPerPage);
+  const numbers = [...Array(npage + 1).keys()].slice(1);
 
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [responseData, setResponseData] = useState("");
-
-    function prePage() {
-      if (currentPage !== 1) {
-        setCurrentPage(currentPage - 1);
-      }
-    }
-
-    function changeCPage(id) {
-      setCurrentPage(id);
-    }
-
-    function nextPage() {
-      if (currentPage !== npage) {
-        setCurrentPage(currentPage + 1);
-      }
-    }
-
-  const startDateHandler = (e)=>{
-    setStartDate(e.target.value)
-    console.log(startDate);
-  }
+  const [responseData, setResponseData] = useState([]);
+  const [error, setError] = useState("")
 
   console.log(startDate);
-    const endDateHandler = (e) => {
-      setEndDate(e.target.value);
+
+  function prePage() {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  }
+
+  function changeCPage(id) {
+    setCurrentPage(id);
+  }
+
+  function nextPage() {
+    if (currentPage !== npage) {
+      setCurrentPage(currentPage + 1);
+    }
+  }
+
+  const startDateHandler = (e) => {
+    setStartDate(e.target.value);
+    console.log(startDate);
+  };
+
+  console.log(startDate);
+  const endDateHandler = (e) => {
+    setEndDate(e.target.value);
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    const semicolonEmail = sessionStorage.getItem("semicolonEmail");
+
+    const dateDetails = {
+      startDate: startDate,
+      endDate: endDate,
+      nativeSemicolonEmail: semicolonEmail,
+      adminSemicolonEmail: "",
+      cohort: ""
     };
 
-    const submitHandler = async (e) =>{
-      e.preventDefault()
-
-      const semicolonEmail = sessionStorage.getItem("semicolonEmail");
-
-      dateDetails = {
-        startDate: startDate,
-        endDate: endDate,
-        semicolonEmail: semicolonEmail,
-      }
-
-       try {
+    try {
       const response = await axios.post(
         "https://elitestracker-production.up.railway.app/api/v1/natives/generateReportForSelf",
         dateDetails
       );
-      console.log(response.data)
-      setResponseData(response.data)
-    } catch (error) {
-      setError(error.response.data.data);
-      console.log(error.response.data.data)
-    }
-    }
+      console.log(response.data);
+      console.log(response);
 
-    // const { serialNumber , firstName, lastName, cohort, date, attendanceStatus} = responseData;
+      if (response.status === 200) {
+       setResponseData(response.data)
+      } else {
+        throw new Error("Network Error");
+      }
+      // console.log(response.data);
+      // setResponseData(response.data);
+    } catch (error) {
+      console.log(error)
+        if (error.message === "Network Error") {
+          setError(error.message);
+        } else {
+          setError(error.response);
+        }
+      // setError(error.response.data.data);
+      // console.log(error.response.data.data);
+    }
+  };
+
+  // const { serialNumber , firstName, lastName, cohort, date, attendanceStatus} = responseData;
 
   return (
     <div className={classes.main}>
       <NativeSideBar />
       <div className={classes.innerContainer}>
         <p>Generate Native's Attendance Report</p>
+        {error && <p>{error}</p>}
         <form action="" onSubmit={submitHandler} className={classes.formInput}>
           <input
             className={classes.input}
@@ -164,15 +184,18 @@ const NativeGenerateAttendanceReport = () => {
             <th>Status</th>
           </thead>
           <tbody>
-            {records.map((report, i) => (
-              <tr key={i}>
-                <td>{report.serialNumber}</td>
-                <td>
-                  {report.date} 
-                </td>
-                <td>{report.attendanceStatus}</td>
-              </tr>
-            ))}
+            {responseData.map((data) => {
+              // const { serialNumber , firstName, lastName, cohort, date, attendanceStatus} = responseData;
+              
+              <tr key={data.serialNumber}>
+                {/* <td>{report.serialNumber}</td> */}
+                <td>{data.serialNumber}</td>
+                <td>{data.date}</td>
+                <td>{data.attendanceStatus}</td>
+                {/* <td>{report.date}</td>
+                <td>{report.attendanceStatus}</td> */}
+              </tr>;
+            })}
           </tbody>
         </table>
         <nav>
@@ -187,7 +210,11 @@ const NativeGenerateAttendanceReport = () => {
                 className={`pageItems $(currentPage === n ? 'active' : '')`}
                 key={i}
               >
-                <a href="#" className={classes.pages} onClick={() => changeCPage(n)}>
+                <a
+                  href="#"
+                  className={classes.pages}
+                  onClick={() => changeCPage(n)}
+                >
                   {n}
                 </a>
               </li>
