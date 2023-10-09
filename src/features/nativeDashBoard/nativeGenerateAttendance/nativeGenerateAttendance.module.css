@@ -49,6 +49,13 @@
     cursor: pointer;
 }
 
+.error{
+    color: red;
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+}
+
 .viewTable{
     width: 100%;
     border-collapse: collapse;
