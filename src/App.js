@@ -15,7 +15,7 @@ import AttendanceInGraph from "./features/nativeDashBoard/attendanceInGraph/Atte
 import TakeAttendance from "./features/nativeDashBoard/takeAttendance/TakeAttendance";
 // import NativeAttendanceReport from "./features/nativeDashBoard/nativeGenerateAttendance/NativeGenerateAttendance";
 import NativeGenerateAttendanceReport from "./features/nativeDashBoard/nativeGenerateAttendance/NativeGenerateAttendance";
-import CreateAdminForm from "./features/dashboards/add_removeAdmin/addAdmin/AddAdmin";
+// import CreateAdminForm from "./features/dashboards/add_removeAdmin/addAdmin/AddAdmin";
 import AddNative from "./features/dashboards/add_removeNative/addNative/AddNative";
 import RemoveNative from "./features/dashboards/add_removeNative/removeNative/RemoveNative";
 import ResetDeviceForm from "./features/nativeDashBoard/resetDevice/ResetDevice";
@@ -29,7 +29,7 @@ function App() {
     <Router>
       <Routes>
         <Route  element={<PrivateRoute/>}>
-          <Route path="/addAdmin" element={<CreateAdminForm/>} />
+          {/* <Route path="/addAdmin" element={<CreateAdminForm/>} /> */}
           <Route path="/adminHome" element={<AdminHome />} />
           <Route path="/setAttendanceTime" element={<SetTime />} />          
           <Route path="/addNative" element={< AddNative/>} />

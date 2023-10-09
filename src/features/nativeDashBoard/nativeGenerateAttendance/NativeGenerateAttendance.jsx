@@ -85,6 +85,19 @@ const NativeGenerateAttendanceReport = () => {
   const [error, setError] = useState("")
 
   console.log(startDate);
+  
+  // function formatDate(inputDate) {
+  //   const [month, day, year] = inputDate.split("/");
+  //   const formattedDate = `${day}/${month}/${year}`;
+
+  //   return formattedDate;
+  // }
+
+  // const formattedStartDate = formatDate(startDate);
+  // const formattedEndDate = formatDate(endDate);
+
+  // console.log(formattedStartDate);
+  // console.log(formattedEndDate);
 
   function prePage() {
     if (currentPage !== 1) {
@@ -114,6 +127,7 @@ const NativeGenerateAttendanceReport = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    console.log("submitted")
 
     const semicolonEmail = sessionStorage.getItem("semicolonEmail");
 
@@ -121,38 +135,30 @@ const NativeGenerateAttendanceReport = () => {
       startDate: startDate,
       endDate: endDate,
       nativeSemicolonEmail: semicolonEmail,
-      adminSemicolonEmail: "",
-      cohort: ""
+      // adminSemicolonEmail: "",
+      // cohort: "",
     };
 
-    try {
-      const response = await axios.post(
-        "https://elitestracker-production.up.railway.app/api/v1/natives/generateReportForSelf",
-        dateDetails
-      );
-      console.log(response.data);
-      console.log(response);
+    console.log(dateDetails)
 
-      if (response.status === 200) {
-       setResponseData(response.data)
-      } else {
-        throw new Error("Network Error");
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https:elitestracker-production.up.railway.app/api/v1/natives/generateReportForSelf", {
+          method: "POST",
+          headers: {
+            "Content-Type": 'application/json',
+          },
+          body: JSON.stringify(dateDetails)
+        })
+        const data = await response.json();
+        console.log(data)
+        setResponseData(data);
+      } catch (error) {
+        console.log(error);
       }
-      // console.log(response.data);
-      // setResponseData(response.data);
-    } catch (error) {
-      console.log(error)
-        if (error.message === "Network Error") {
-          setError(error.message);
-        } else {
-          setError(error.response);
-        }
-      // setError(error.response.data.data);
-      // console.log(error.response.data.data);
-    }
+    };
+    fetchData();
   };
-
-  // const { serialNumber , firstName, lastName, cohort, date, attendanceStatus} = responseData;
 
   return (
     <div className={classes.main}>
@@ -179,23 +185,38 @@ const NativeGenerateAttendanceReport = () => {
         </form>
         <table className={classes.viewTable}>
           <thead>
-            <th>S/N</th>
-            <th>Date</th>
-            <th>Status</th>
+            <tr>
+              <th>S/N</th>
+              <th>Date</th>
+              <th>Status</th>
+            </tr>
           </thead>
           <tbody>
-            {responseData.map((data) => {
-              // const { serialNumber , firstName, lastName, cohort, date, attendanceStatus} = responseData;
-              
+            {/* {responseData.map((data) => {
+              const { serialNumber , firstName, lastName, cohort, date, attendanceStatus} = responseData;
+             
+
               <tr key={data.serialNumber}>
-                {/* <td>{report.serialNumber}</td> */}
+                <td>{report.serialNumber}</td>
                 <td>{data.serialNumber}</td>
                 <td>{data.date}</td>
                 <td>{data.attendanceStatus}</td>
-                {/* <td>{report.date}</td>
-                <td>{report.attendanceStatus}</td> */}
+                <td>{report.date}</td>
+                <td>{report.attendanceStatus}</td>
               </tr>;
-            })}
+            })} */}
+
+             {
+                responseData.map((data) => {
+                  return (
+                    <tr key={data.serialNumber}>
+                      <td>{data.serialNumber}</td>
+                      <td>{data.date}</td>
+                      <td>{data.attendanceStatus}</td>
+                    </tr>
+                  );
+                })
+              }
           </tbody>
         </table>
         <nav>
@@ -205,7 +226,7 @@ const NativeGenerateAttendanceReport = () => {
                 Prev
               </a>
             </li>
-            {numbers.map((n, i) => (
+            {/* {numbers.map((n, i) => (
               <li
                 className={`pageItems $(currentPage === n ? 'active' : '')`}
                 key={i}
@@ -218,7 +239,7 @@ const NativeGenerateAttendanceReport = () => {
                   {n}
                 </a>
               </li>
-            ))}
+            ))} */}
             <li>
               <a href="#" className={classes.prePage} onClick={nextPage}>
                 Next
@@ -227,56 +248,8 @@ const NativeGenerateAttendanceReport = () => {
           </ul>
         </nav>
       </div>
-
-      {/* <table className="view-table">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Name</th>
-            <th>Result</th>
-          </tr>
-        </thead>
-        <tbody>
-          {viewlog.map((viewlog, index) => (
-            <tr key={index}>
-              <td>{viewlog.Date}</td>
-              <td>{viewlog.Name}</td>
-              <td>{viewlog.Result}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table> */}
     </div>
   );
 };
 
 export default NativeGenerateAttendanceReport;
-// import React, { useState } from "react";
-// import DatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
-
-// function NativeGenerateAttendanceReport() {
-//   const [selectedDate, setSelectedDate] = useState(null);
-
-//   const handleDateChange = (date) => {
-//     setSelectedDate(date);
-//     console.log(date);
-//   };
-
-//   return (
-//     <div>
-//       <h2>Calendar Input</h2>
-//       <DatePicker
-//         selected={selectedDate}
-//         onChange={handleDateChange}
-//         dateFormat="dd/MM/yyyy"
-//         placeholderText="dd/mm/yyyy"
-//       />
-//       {selectedDate && (
-//         <p>Selected Date: {selectedDate.toLocaleDateString("en-GB")}</p>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default NativeGenerateAttendanceReport;

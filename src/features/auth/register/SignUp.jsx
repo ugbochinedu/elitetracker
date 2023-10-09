@@ -25,6 +25,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [scv, setScv] = useState("");
   const [detail, setDetail] = useState("");
+  const [successfulMessage, setSuccessfulMessage] = useState("")
 
   const navigate = useNavigate();
 
@@ -149,15 +150,21 @@ const SignUp = () => {
       );
       // console.log(userDetails)
 
-      // console.log("Data sent successfully:", response.data);
+      console.log("Data sent successfully:", response.data);
+      setSuccessfulMessage(response.data.message);
       // console.log("response", response.status);
 
       if(response.status === 200){
         console.log(userDetails);
          if (userDetails.semicolonEmail.includes("native")) {
-           navigate("/");
+           setTimeout(() => {
+             navigate("/");
+            }, 1800);
+           
          } else {
-           navigate("/adminHome");
+          setTimeout(() => {
+            navigate("/adminHome");
+          }, 1800);          
          } 
       } else {
          throw new Error("Network Error");
@@ -228,6 +235,7 @@ const SignUp = () => {
           </div> */}
           <p className={classes.register}>REGISTER</p>
           <form action="" className={classes.form} onSubmit={onSumbitHandler}>
+            {successfulMessage && <h2 className={classes.error}>{successfulMessage}</h2>}
             {error && <h2 className={classes.error}>{error}</h2>}
             <label htmlFor="email">
               Email <span>*</span>
