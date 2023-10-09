@@ -7,10 +7,22 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 
 const TakeAttendance = () => {
+
+  //  const currentDate = new Date();
+  //   const formattedDate = currentDate.toLocaleString("en-US", {
+  //    day: "numeric",
+  //    month: "long",
+  //    year: "numeric",
+  //    hour: "numeric",
+  //    minute: "numeric",
+  //    second: "numeric",
+  //  });
+
   const [firstName, setFirstName] = useState("");
   const [message, setMessage] = useState("");
   // const [attendanceStatus, setAttendanceStatus] = useState("")
   const [time, setTime] = useState("");
+  // const [previousTime, setPreviousTime] = useState(formattedDate);
   const [error, setError] = useState("");
   const [ipAddress, setIpAddress] = useState("");
 
@@ -123,20 +135,48 @@ const TakeAttendance = () => {
     setInterval(() => {
       setTime(getTime());
     }, 1000);
+     
   }, []);
 
-  function getTime() {
-    const now = new Date();
-    return now.toLocaleString("en-Us", {
-      weekday: "long",
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      second: "numeric",
-    });
-  }
+      function getTime() {
+        const now = new Date();
+        return now.toLocaleString("en-Us", {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+          second: "numeric",
+        });
+      }
+
+    // function Time() {
+    //   const now = new Date();
+    //   return now.toLocaleString("en-Us", {
+    //     weekday: "long",
+    //     day: "numeric",
+    //     month: "long",
+    //     year: "numeric",
+    //     hour: "numeric",
+    //     minute: "numeric",
+    //     second: "numeric",
+    //   });
+    // }
+
+  //  useEffect(() => {
+  //    const interval = setInterval(() => {
+  //      const currentTime = Time();
+
+  //      if (currentTime !== previousTime) {
+  //        window.location.reload();
+  //      }
+
+  //      setPreviousTime(currentTime);
+  //    }, 1000);
+
+  //    return () => clearInterval(interval); // Clean up interval on component unmount
+  //  }, []);
 
   useEffect(() => {
     const screenWidth = window.screen.width;
@@ -151,7 +191,7 @@ const TakeAttendance = () => {
 
     // setAttendanceStatus("PRESENT");
     // const jwtToken = sessionStorage.getItem("jwtToken");
-    const email = sessionStorage.getItem("semicolconEmail");
+    const email = sessionStorage.getItem("semicolonEmail");
     const fiftyOneDegrees = "AQRmWD6-Ownn-OvF20g";
 
     console.log("sent ipAddress", ipAddressConcat);
@@ -199,9 +239,9 @@ const TakeAttendance = () => {
     } catch (error) {
       console.log(error);
       if (error.message === "Network Error") {
-        setError(error.message);
+        setMessage(error.message);
       } else {
-        setError(error.response.data.data);
+        setMessage(error.response.data.data);
       }
       // console.log(error.message);
       // console.log(error.response);
@@ -245,6 +285,7 @@ const TakeAttendance = () => {
         <div className={classes.firstContainer}>
           <h1>Welcome, {firstName} </h1>
           <h2 className={classes.time}>{time}</h2>
+          {/* <h2 className={classes.time}>{previousTime}</h2> */}
           <p>Please, take your attendance</p>
           <Button onClick={onClickHandler} className={classes.button}>
             Mark Attendance

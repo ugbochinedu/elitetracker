@@ -121,7 +121,7 @@ import classes from "./styles/login.module.css";
 import AuthImage from "../../reusables/AuthImages";
 import Card from "../../UI/card/Card";
 import Button from "../../UI/button/Button";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link} from "react-router-dom";
 // import semiImage from "../../../assests/images/semi.png";
 import axios from "axios";
 
@@ -134,7 +134,10 @@ const Login = () => {
   const [data, setData] = useState(initialValue);
   const [error, setError] = useState(null);
   const [networkError, setNetworkError] = useState("");
+  const [successfulMessage, setSuccessfulMessage] = useState("");
+
   const navigate = useNavigate();
+  // const history = useHistory();
 
   const onChangleHandler = (e) => {
     setData((prev) => ({
@@ -165,14 +168,30 @@ const Login = () => {
         console.log(jwtToken)
         sessionStorage.setItem("jwtToken", jwtToken);
         sessionStorage.setItem('firstName', JSON.stringify(response.data.firstName));
-        sessionStorage.setItem('semicolconEmail', JSON.stringify(response.data.semicolonEmail));
+        sessionStorage.setItem('semicolonEmail', JSON.stringify(response.data.semicolonEmail));
         sessionStorage.setItem('isLoggedIn', JSON.stringify(response.data.loggedIn));
+
+        setSuccessfulMessage(response.data.message);
+
+        // setTimeout(() => {
+        //   setSuccessfulMessage(response.data.message);
+        // }, 15000);
         
         if (response.data.semicolonEmail.includes("native")) {
           console.log("I am here");
-          navigate("/native/takeAttendance");
+          console.log(response.data.message);
+          
+          setTimeout(() => {
+            navigate("/native/takeAttendance");
+            // setSuccessfulMessage(response.data.message);
+          }, 2000);
+          // navigate("/native/takeAttendance");
         } else {
-          navigate("/adminHome");
+           setTimeout(() => {
+             navigate("/adminHome");
+             // setSuccessfulMessage(response.data.message);
+           }, 2000);
+          // navigate("/adminHome");
         }
       } else {
          throw new Error("Network Error");
@@ -217,6 +236,7 @@ const Login = () => {
           <p className={classes.loginText}>LOGIN</p>
           <form action="" onSubmit={onSubmitHandler} className={classes.form}>
             {error && <p className={classes.error}>{error}</p>}
+            {successfulMessage && <p className={classes.error}>{successfulMessage}</p>}
             {networkError && <p className={classes.error}>{networkError}</p>}
             <label htmlFor="">
               Email <span>*</span>

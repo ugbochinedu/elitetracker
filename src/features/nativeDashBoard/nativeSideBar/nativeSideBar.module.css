@@ -19,7 +19,7 @@
 }
 
 .sideBar{
-    width: 23%;
+    width: 350px;
     background-color: rgb(255,255,255);
     height: 680px;
     color:  rgb(247,46,46);
@@ -77,30 +77,20 @@
     padding-left: 10px;
 }
 
-.LinkLogout:hover{
+/* .LinkLogout:hover{
     background-color: rgb(247,46,46);
     color: white;
     font-weight: 700;
     width: 85%;
-}
+} */
+/* 
+.linkContainer{
+    width: 100%;
+} */
 
 @media screen and (max-width: 1250px) {
     .sideBar{
-        width: 25%;
-        background-color: rgb(255,255,255);
-        height: 680px;
-        color:  rgb(247,46,46);
-        box-shadow: 0 0 5px 5px rgb(202,202 ,202 );
-        display:grid;
-        grid-template-rows: 15% 80%;
-        row-gap: 40px;
-        padding-top: 5px;
-    }
-}
-
-@media screen and (min-width: 700px) and (max-width: 1240px){
-    .sideBar{
-        width: 30%;
+        width: 330px;
         background-color: rgb(255,255,255);
         height: 680px;
         color:  rgb(247,46,46);
@@ -114,13 +104,41 @@
         background-color: rgb(247,46,46);
         color: white;
         font-weight: 700;
-        width: inherit;
+        width: 300px;
     }
 
-    .LinkLogout:hover{
+    /* .LinkLogout:hover{
+        background-color: rgb(247,46,46);
+        color: white;
+        font-weight: 700;
+        width: 300px;
+    } */
+}
+
+@media screen and (min-width: 900px) and (max-width: 1240px){
+    .sideBar{
+        width: 310px;
+        background-color: rgb(255,255,255);
+        height: 680px;
+        color:  rgb(247,46,46);
+        box-shadow: 0 0 5px 5px rgb(202,202 ,202 );
+        display:grid;
+        grid-template-rows: 15% 80%;
+        row-gap: 40px;
+        padding-top: 5px;
+    }
+    .Link:hover{
+        background-color: rgb(247,46,46);
+        color: white;
+        font-weight: 700;
+        width: 280px;
+    }
+
+    /* .LinkLogout:hover{
         background-color: rgb(247,46,46);
         color: white;
         font-weight: 700;
         width: 75%;
-    }
+    } */
+    
 }
