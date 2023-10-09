@@ -1,6 +1,6 @@
 import classes from "./SideBar.module.css"
 import { Link } from "react-router-dom";  
-import semiImage from "../../../assests/images/semi.png"
+import semiImage from "../../../assests/images/semocolonLogo-removebg-preview.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faHouse} from "@fortawesome/free-solid-svg-icons/faHouse";
 import {faUserPlus} from "@fortawesome/free-solid-svg-icons";
@@ -22,7 +22,7 @@ const SideBar = () =>{
         <div className={classes.logo}>
           {/* <h2>{semiImage}</h2> */}
           <img src={semiImage} alt="Semicolon image"/>
-          <h1>SEMICOLON</h1>
+          {/* <h1>SEMICOLON</h1> */}
         </div>
         <div className={classes.sideBarItems}>
           <div className={classes.linkContainer}>

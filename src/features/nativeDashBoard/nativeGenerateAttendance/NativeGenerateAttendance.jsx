@@ -3,101 +3,21 @@ import React, { useState } from "react";
 import NativeSideBar from "../nativeSideBar/nativeSideBar";
 import classes from "./nativeGenerateAttendance.module.css";
 import Button from "../../UI/button/Button";
-import axios from "axios";
-// import DatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
 
 const NativeGenerateAttendanceReport = () => {
-  const attendanceReport = [
-    {
-      serialNumber: "1",
-      date: "22/12/2023",
-      attendanceStatus: "P",
-    },
-    {
-      serialNumber: "2",
-      date: "22/12/2023",
-      attendanceStatus: "P",
-    },
-    {
-      serialNumber: "3",
-      date: "22/12/2023",
-      attendanceStatus: "P",
-    },
-    {
-      serialNumber: "4",
-      date: "22/12/2023",
-      attendanceStatus: "P",
-    },
-    {
-      serialNumber: "5",
-      date: "22/12/2023",
-      attendanceStatus: "P",
-    },
-    {
-      serialNumber: "6",
-      date: "22/12/2023",
-      attendanceStatus: "P",
-    },
-    {
-      serialNumber: "7",
-      date: "22/12/2023",
-      attendanceStatus: "P",
-    },
-    {
-      serialNumber: "8",
-      date: "22/12/2023",
-      attendanceStatus: "P",
-    },
-    {
-      serialNumber: "1",
-      date: "22/12/2023",
-      attendanceStatus: "P",
-    },
-    {
-      serialNumber: "1",
-      date: "22/12/2023",
-      attendanceStatus: "P",
-    },
-    {
-      serialNumber: "9",
-      date: "22/12/2023",
-      attendanceStatus: "P",
-    },
-    {
-      serialNumber: "10",
-      date: "22/12/2023",
-      attendanceStatus: "P",
-    },
-  ];
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const recordsPerPage = 5;
-  const lastIndex = currentPage * recordsPerPage;
-  const firstIndex = lastIndex - recordsPerPage;
-  // const records = attendanceReport.slice(firstIndex, lastIndex);
-  const npage = Math.ceil(attendanceReport.length / recordsPerPage);
-  const numbers = [...Array(npage + 1).keys()].slice(1);
-
+ 
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [responseData, setResponseData] = useState([]);
   const [error, setError] = useState("")
 
-  console.log(startDate);
-  
-  // function formatDate(inputDate) {
-  //   const [month, day, year] = inputDate.split("/");
-  //   const formattedDate = `${day}/${month}/${year}`;
-
-  //   return formattedDate;
-  // }
-
-  // const formattedStartDate = formatDate(startDate);
-  // const formattedEndDate = formatDate(endDate);
-
-  // console.log(formattedStartDate);
-  // console.log(formattedEndDate);
+  const [currentPage, setCurrentPage] = useState(1);
+  const recordsPerPage = 5;
+  const lastIndex = currentPage * recordsPerPage;
+  const firstIndex = lastIndex - recordsPerPage;
+  const records = responseData.slice(firstIndex, lastIndex);
+  const npage = Math.ceil(responseData.length / recordsPerPage);
+  const numbers = [...Array(npage + 1).keys()].slice(1);
 
   function prePage() {
     if (currentPage !== 1) {
@@ -132,7 +52,7 @@ const NativeGenerateAttendanceReport = () => {
     const semicolonEmail = sessionStorage.getItem("semicolonEmail");
 
     const dateDetails = {
-      startDate: startDate,
+      startDate:startDate,
       endDate: endDate,
       nativeSemicolonEmail: semicolonEmail,
       // adminSemicolonEmail: "",
@@ -143,18 +63,29 @@ const NativeGenerateAttendanceReport = () => {
 
     const fetchData = async () => {
       try {
-        const response = await fetch("https:elitestracker-production.up.railway.app/api/v1/natives/generateReportForSelf", {
-          method: "POST",
-          headers: {
-            "Content-Type": 'application/json',
-          },
-          body: JSON.stringify(dateDetails)
-        })
+        const response = await fetch(
+          "https:elitestracker-production.up.railway.app/api/v1/natives/generateReportForSelf",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dateDetails),
+          }
+        );
         const data = await response.json();
-        console.log(data)
-        setResponseData(data);
+
+        if (response.status === 200) {
+          setResponseData(data);
+        } else {
+          throw new Error("Network Error");
+        }
       } catch (error) {
-        console.log(error);
+        if (error.message === "Network Error") {
+          setError(error.message);
+        } else {
+          setError(error.response.data.data);
+        }
       }
     };
     fetchData();
@@ -165,7 +96,7 @@ const NativeGenerateAttendanceReport = () => {
       <NativeSideBar />
       <div className={classes.innerContainer}>
         <p>Generate Native's Attendance Report</p>
-        {error && <p>{error}</p>}
+        {error && <p className={classes.error}>{error}</p>}
         <form action="" onSubmit={submitHandler} className={classes.formInput}>
           <input
             className={classes.input}
@@ -194,20 +125,10 @@ const NativeGenerateAttendanceReport = () => {
           <tbody>
             {/* {responseData.map((data) => {
               const { serialNumber , firstName, lastName, cohort, date, attendanceStatus} = responseData;
-             
-
-              <tr key={data.serialNumber}>
-                <td>{report.serialNumber}</td>
-                <td>{data.serialNumber}</td>
-                <td>{data.date}</td>
-                <td>{data.attendanceStatus}</td>
-                <td>{report.date}</td>
-                <td>{report.attendanceStatus}</td>
-              </tr>;
             })} */}
 
              {
-                responseData.map((data) => {
+                records.map((data) => {
                   return (
                     <tr key={data.serialNumber}>
                       <td>{data.serialNumber}</td>
@@ -226,7 +147,7 @@ const NativeGenerateAttendanceReport = () => {
                 Prev
               </a>
             </li>
-            {/* {numbers.map((n, i) => (
+            {numbers.map((n, i) => (
               <li
                 className={`pageItems $(currentPage === n ? 'active' : '')`}
                 key={i}
@@ -239,7 +160,7 @@ const NativeGenerateAttendanceReport = () => {
                   {n}
                 </a>
               </li>
-            ))} */}
+            ))}
             <li>
               <a href="#" className={classes.prePage} onClick={nextPage}>
                 Next
