@@ -10,6 +10,7 @@ const ForgottenPassword = () =>{
 
   const [userEmail, setUserEmail] = useState("")
   const [error, setError] = useState(null);
+  const [successfulMessage, setSuccessfulMessage] = useState("")
   const navigate = useNavigate()
 
   const changleHandler = (e) =>{
@@ -25,57 +26,60 @@ const ForgottenPassword = () =>{
 
     console.log(inputtedEmail);
 
-    //note: I will need the email to navigate
-
     try {
       const response = await axios.post(
         "https://elitestracker-production.up.railway.app/api/v1/user/emailForPasswordReset",
         inputtedEmail
       );
-      console.log(response)
+
       if(response.status === 200){
         sessionStorage.setItem("email", userEmail)
+        setSuccessfulMessage(response.data.message);
+        
+        setTimeout(() => {
         navigate("/confirmationCode");
+        }, 1600);
       } else {
         throw new Error("Network Error");
       }
       } catch (error) {
         console.log(error)
-
-        if(error.message === "Network Error"){
-          setError(error.message);
-        }else{
-          setError(error.response.data.data);
-        }
+         setTimeout(() => {
+            if (error.message === "Network Error") {
+              setError(error.message);
+            } else {
+              setError(error.response.data.data);
+            }
+         }, 1500);
       }
-    navigate("/confirmationCode");
   };
 
-    return (
-      <div className={classes.mainContainer}>
-        <AuthImage />
-        <div className={classes.formContainer}>
-          <p>Enter your Email Address</p>
-          <p className={classes.error}>{error}</p>
-          <form action="" onSubmit={submitHandler}>
-            <label htmlFor="email">
-              Email <span>*</span>
-            </label>
-            <div>
-              <input
-                placeholder="Semicolon email"
-                type="email"
-                name="email"
-                onChange={changleHandler}
-                // value={data.email}
-                required
-              />
-            </div>
-            <Button className={classes.btn}>Submit</Button>
-          </form>
-        </div>
+  return (
+    <div className={classes.mainContainer}>
+      <AuthImage />
+      <div className={classes.formContainer}>
+        <p>Enter your Email Address</p>
+        <p className={classes.error}>{error}</p>
+        <p className={classes.error}>{successfulMessage}</p>
+        <form action="" onSubmit={submitHandler}>
+          <label htmlFor="email">
+            Email <span>*</span>
+          </label>
+          <div>
+            <input
+              placeholder="Semicolon email"
+              type="email"
+              name="email"
+              onChange={changleHandler}
+              // value={data.email}
+              required
+            />
+          </div>
+          <Button className={classes.btn}>Submit</Button>
+        </form>
       </div>
-    );
+    </div>
+  );
 };
 
 export default ForgottenPassword;

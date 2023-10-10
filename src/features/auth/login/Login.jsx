@@ -184,13 +184,13 @@ const Login = () => {
           setTimeout(() => {
             navigate("/native/takeAttendance");
             // setSuccessfulMessage(response.data.message);
-          }, 2000);
+          }, 1600);
           // navigate("/native/takeAttendance");
         } else {
            setTimeout(() => {
              navigate("/adminHome");
              // setSuccessfulMessage(response.data.message);
-           }, 2000);
+           }, 1600);
           // navigate("/adminHome");
         }
       } else {
