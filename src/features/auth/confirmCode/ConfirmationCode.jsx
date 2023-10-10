@@ -16,46 +16,16 @@ const ConfirmForgottenPasswordCode = () => {
     }
   };
 
-//   const [firstInput, setFirstInput] = useState("")
-//   const [secondInput, setSecondInput] = useState("");
-//   const [thirdInput, setThirdInput] = useState("");
-//   const [fourthInput, setFourthInput] = useState("");
-
   const navigate = useNavigate();
 
   const submitHandler = async (e) =>{
     e.preventDefault()
 
-    // const inputRefs = (firstInput + secondInput + thirdInput + fourthInput)
-    console.log(inputRefs)
-    console.log(typeof inputRefs)
+    const code = inputRefs.map((ref) => ref.current.value).join("");
+    console.log(code);
 
-    const confirmationCode = {
-      code: inputRefs
-    }
+    sessionStorage.setItem("code", code);
 
-    console.log(confirmationCode)
-
-    try {
-      const response = await axios.post(
-        // "https://elitestracker-production.up.railway.app/api/v1/user/confirmationCode",
-        confirmationCode
-      );
-      console.log(response)
-      if(response.status === 200){
-        navigate("/");
-      } else {
-        throw new Error("Network Error");
-      }
-      } catch (error) {
-        console.log(error)
-
-        if(error.message === "Network Error"){
-          setError(error.message);
-        }else{
-          setError(error.response.data.data);
-        }
-      }
     navigate("/resetPassword");
   }
 

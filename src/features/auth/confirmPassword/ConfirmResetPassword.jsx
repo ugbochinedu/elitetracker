@@ -2,6 +2,8 @@ import { useState } from "react";
 import AuthImage from "../../reusables/AuthImages";
 import classes from "../confirmPassword/confirmPassword.module.css"
 import Button from "../../UI/button/Button";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ConfirmResetPassword = () => {
 
@@ -9,9 +11,14 @@ const ConfirmResetPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("")
 
+  const navigate = useNavigate();
+
  
   const submitHandler = async (e) =>{
     e.preventDefault();
+
+    const inputtedCode = sessionStorage.getItem("code");
+    console.log(typeof inputtedCode)
 
     if (password === confirmPassword) {
       setConfirmPassword(confirmPassword);
@@ -22,35 +29,38 @@ const ConfirmResetPassword = () => {
 
     const userNewPassword = {
       newPassword: confirmPassword,
+      token : inputtedCode
     };
 
     console.log(userNewPassword);
 
-    // try {
-    //   const response = await axios.post(
-    //     // "https://elitestracker-production.up.railway.app/api/v1/user/confirmResetPassword",
-    //     userNewPassword
-    //   );
-    //   console.log(response)
-    //   if(response.status === 200){
-    // if (response.data.semicolonEmail.includes("native")) {
-    //   console.log("I am here");
-    //   navigate("/resetPassword");
-    // } else {
-    //   navigate("/adminHome");
-    // }
-    //   } else {
-    //     throw new Error("Network Error");
-    //   }
-    //   } catch (error) {
-    //     console.log(error)
+    try {
+      const response = await axios.patch(
+        "https://elitestracker-production.up.railway.app/api/v1/user/resetPassword",
+        userNewPassword
+      );
+      console.log(response)
+      const myEmail = sessionStorage.getItem("email")
+      console.log("my Email is", myEmail)
+      if(response.status === 200){
+        if (myEmail.includes("native")) {
+          console.log("I am here");
+          navigate("/");
+        } else {
+          navigate("/adminHome");
+        }
+      } else {
+        throw new Error("Network Error");
+      }
+      } catch (error) {
+        console.log(error)
 
-    //     if(error.message === "Network Error"){
-    //       setError(error.message);
-    //     }else{
-    //       setError(error.response.data.data);
-    //     }
-    //   }
+        if(error.message === "Network Error"){
+          setError(error.message);
+        }else{
+          setError(error.response.data.data);
+        }
+      }
   }
 
   return (

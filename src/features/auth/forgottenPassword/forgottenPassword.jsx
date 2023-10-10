@@ -4,6 +4,7 @@ import classes from "./forgottenPassword.module.css"
 import semiImage from "../../../assests/images/semi.png"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"
 
 const ForgottenPassword = () =>{
 
@@ -19,33 +20,34 @@ const ForgottenPassword = () =>{
     e.preventDefault();
 
     const inputtedEmail = {
-      email: userEmail,
+      semicolonEmail: userEmail,
     };
 
     console.log(inputtedEmail);
 
     //note: I will need the email to navigate
 
-    // try {
-    //   const response = await axios.post(
-    //     // "https://elitestracker-production.up.railway.app/api/v1/user/forgetPassword",
-    //     inputtedEmail
-    //   );
-    //   console.log(response)
-    //   if(response.status === 200){
-    //     navigate("/confirmationCode");
-    //   } else {
-    //     throw new Error("Network Error");
-    //   }
-    //   } catch (error) {
-    //     console.log(error)
+    try {
+      const response = await axios.post(
+        "https://elitestracker-production.up.railway.app/api/v1/user/emailForPasswordReset",
+        inputtedEmail
+      );
+      console.log(response)
+      if(response.status === 200){
+        sessionStorage.setItem("email", userEmail)
+        navigate("/confirmationCode");
+      } else {
+        throw new Error("Network Error");
+      }
+      } catch (error) {
+        console.log(error)
 
-    //     if(error.message === "Network Error"){
-    //       setError(error.message);
-    //     }else{
-    //       setError(error.response.data.data);
-    //     }
-    //   }
+        if(error.message === "Network Error"){
+          setError(error.message);
+        }else{
+          setError(error.response.data.data);
+        }
+      }
     navigate("/confirmationCode");
   };
 
@@ -61,7 +63,7 @@ const ForgottenPassword = () =>{
             </label>
             <div>
               <input
-                placeholder="Semicolon's email"
+                placeholder="Semicolon email"
                 type="email"
                 name="email"
                 onChange={changleHandler}
