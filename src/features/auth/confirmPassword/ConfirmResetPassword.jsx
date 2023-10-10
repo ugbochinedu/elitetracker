@@ -10,6 +10,7 @@ const ConfirmResetPassword = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("")
+  const [successfulMessage, setSuccessfulMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -44,8 +45,10 @@ const ConfirmResetPassword = () => {
       console.log("my Email is", myEmail)
       if(response.status === 200){
         if (myEmail.includes("native")) {
-          console.log("I am here");
-          navigate("/");
+          setSuccessfulMessage(response.data.message);         
+           setTimeout(() => {
+            navigate("/");
+           }, 1800);
         } else {
           navigate("/adminHome");
         }
@@ -54,12 +57,13 @@ const ConfirmResetPassword = () => {
       }
       } catch (error) {
         console.log(error)
-
-        if(error.message === "Network Error"){
-          setError(error.message);
-        }else{
-          setError(error.response.data.data);
-        }
+         setTimeout(() => {
+          if (error.message === "Network Error") {
+            setError(error.message);
+          } else {
+            setError(error.response.data.data);
+          }
+         }, 1800);      
       }
   }
 
@@ -70,6 +74,7 @@ const ConfirmResetPassword = () => {
         <p>Reset Password</p>
         <form action="" onSubmit={submitHandler}>
           <p className={classes.error}>{error}</p>
+          <p className={classes.error}>{successfulMessage}</p>
           <label htmlFor="">Your new password</label> <span>*</span>
           <div className={classes.form}>
             <input
