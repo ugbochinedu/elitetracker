@@ -32,7 +32,8 @@
 
 .sideBar{
     width: 380px;
-    background-color: rgb(233,233,233);
+    /* background-color: rgb(233,233,233); */
+    background-color: white;
     height: 680px;
     color:  rgb(247,46,46);
     box-shadow: 0 0 5px 5px rgb(202,202 ,202 );

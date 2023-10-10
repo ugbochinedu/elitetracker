@@ -42,7 +42,7 @@ const SideBar = () =>{
           </div>
           <div className={classes.linkContainer}>
               <Link to={"/addCohort"} className={classes.Link} >
-              <FontAwesomeIcon icon={faCirclePlus} /><p>Add Cohort</p>
+              <FontAwesomeIcon icon={faCirclePlus} /><p>Add Native</p>
               </Link>
           </div>
           <div className={classes.linkContainer}>
