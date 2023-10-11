@@ -48,7 +48,9 @@ const NativeSideBar = () => {
           <div className={classes.LinkLogoutContain}>
             <Link className={classes.Link}>
               <FontAwesomeIcon icon={faRightFromBracket} />
-              <button onClick={handleLogout}>Logout</button>
+              <button className={classes.Link} onClick={handleLogout}>
+                Logout
+              </button>
               <p></p>
             </Link>
           </div>
