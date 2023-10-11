@@ -5,11 +5,10 @@ import classes from "./nativeGenerateAttendance.module.css";
 import Button from "../../UI/button/Button";
 
 const NativeGenerateAttendanceReport = () => {
- 
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [responseData, setResponseData] = useState([]);
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
 
   const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 5;
@@ -47,19 +46,19 @@ const NativeGenerateAttendanceReport = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log("submitted")
+    console.log("submitted");
 
     const semicolonEmail = sessionStorage.getItem("semicolonEmail");
 
     const dateDetails = {
-      startDate:startDate,
+      startDate: startDate,
       endDate: endDate,
       nativeSemicolonEmail: semicolonEmail,
       // adminSemicolonEmail: "",
       // cohort: "",
     };
 
-    console.log(dateDetails)
+    console.log(dateDetails);
 
     const fetchData = async () => {
       try {
@@ -75,7 +74,8 @@ const NativeGenerateAttendanceReport = () => {
           }
         );
         const data = await response.json();
-        console.log(data)
+        console.log(JSON.stringify(dateDetails))
+        console.log(typeof JSON.stringify(dateDetails));
 
         if (response.status === 200) {
           setResponseData(data);
@@ -129,17 +129,15 @@ const NativeGenerateAttendanceReport = () => {
               const { serialNumber , firstName, lastName, cohort, date, attendanceStatus} = responseData;
             })} */}
 
-             {
-                records.map((data) => {
-                  return (
-                    <tr key={data.serialNumber}>
-                      <td>{data.serialNumber}</td>
-                      <td>{data.date}</td>
-                      <td>{data.attendanceStatus}</td>
-                    </tr>
-                  );
-                })
-              }
+            {records.map((data) => {
+              return (
+                <tr key={data.serialNumber}>
+                  <td>{data.serialNumber}</td>
+                  <td>{data.date}</td>
+                  <td>{data.attendanceStatus}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
         <nav>
