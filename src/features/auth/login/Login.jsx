@@ -198,14 +198,15 @@ const Login = () => {
        }
     } catch (error) {
       console.log(error)
-      
-      if(error.message === "Network Error"){
-         console.log(error);
+      setTimeout(() => {
+        if (error.message === "Network Error") {
+          console.log(error);
           console.log(error.message);
-        setNetworkError(error.message);
-      }else{
-        setError(error.response.data.data);
-      }
+          setNetworkError(error.message);
+        } else {
+          setError(error.response.data.data);
+        }
+      }, 1600);
     }
      
     //  console.log(typeof email);
@@ -236,7 +237,7 @@ const Login = () => {
           <p className={classes.loginText}>LOGIN</p>
           <form action="" onSubmit={onSubmitHandler} className={classes.form}>
             {error && <p className={classes.error}>{error}</p>}
-            {successfulMessage && <p className={classes.error}>{successfulMessage}</p>}
+            {successfulMessage && <p className={classes.message}>{successfulMessage}</p>}
             {networkError && <p className={classes.error}>{networkError}</p>}
             <label htmlFor="">
               Email <span>*</span>

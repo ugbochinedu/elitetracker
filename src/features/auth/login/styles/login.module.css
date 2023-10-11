@@ -79,6 +79,13 @@
     text-align: center;
 }
 
+.message{
+    color: green;
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+}
+
 .flexLogoText{
     display: flex;
     width: 250px;

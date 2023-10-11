@@ -118,7 +118,7 @@ const NativeGenerateAttendanceReport = () => {
           <thead>
             <tr>
               <th>S/N</th>
-              <th>Date</th>
+              <th>Date & Time</th>
               <th>Status</th>
             </tr>
           </thead>
