@@ -64,7 +64,7 @@ const NativeGenerateAttendanceReport = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https:elitestracker-production.up.railway.app/api/v1/natives/generateReportForSelf",
+          "https://elitestracker-production.up.railway.app/api/v1/natives/generateReportForSelf",
           {
             method: "POST",
             headers: {
