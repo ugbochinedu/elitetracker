@@ -1,16 +1,16 @@
-*{
-    margin: 0;
+* {
+  margin: 0;
 }
 
 .logo {
-    display: flex;
-    align-items: center;
-    width: 260px;
-    justify-content: space-between;
-    color: white;
-    margin-left: 17px;
-    /* height: 70px; */
-    /* box-shadow: 0 0 2px 1px gray; */
+  display: flex;
+  align-items: center;
+  width: 260px;
+  justify-content: space-between;
+  color: white;
+  margin-left: 17px;
+  /* height: 70px; */
+  /* box-shadow: 0 0 2px 1px gray; */
 }
 
 /* .logo img {
@@ -19,8 +19,8 @@
 } */
 
 .logo img {
-    width: 300px;
-    height: 45px;
+  width: 300px;
+  height: 45px;
 }
 
 /* .sideBar{
@@ -30,17 +30,17 @@
     color: white;
 } */
 
-.sideBar{
-    width: 380px;
-    /* background-color: rgb(233,233,233); */
-    background-color: white;
-    height: 680px;
-    color:  rgb(247,46,46);
-    box-shadow: 0 0 5px 5px rgb(202,202 ,202 );
-    display:grid;
-    grid-template-rows: 15% 80%;
-    /* row-gap: 40px; */
-    padding-top: 5px;
+.sideBar {
+  width: 380px;
+  /* background-color: rgb(233,233,233); */
+  background-color: white;
+  height: 680px;
+  color: rgb(247, 46, 46);
+  box-shadow: 0 0 5px 5px rgb(202, 202, 202);
+  display: grid;
+  grid-template-rows: 15% 80%;
+  /* row-gap: 40px; */
+  padding-top: 5px;
 }
 
 /* .sideBarItems, .logo{
@@ -60,29 +60,34 @@
 } */
 
 .Link {
-    display: flex;
-    align-items: center;
-   text-decoration: none;
-   color: rgb(247,46,46);
-   font-size: 18px;
-   padding: 0px 15px;
-   font-weight: 500;
-   width: 350px;
-   height: 46px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: rgb(247, 46, 46);
+  font-size: 18px;
+  padding: 0px 15px;
+  font-weight: 500;
+  width: 350px;
+  height: 46px;
 }
 
-.Link p{
-    padding-left: 10px;
+.Link p {
+  padding-left: 10px;
 }
 
-.linkContainer{
-    display: flex;
+button {
+  border: none;
+  background: none;
 }
 
-.Link:hover{
-    color: white;
-    background-color: rgb(247,46,46);
-    font-weight: 700;
+.linkContainer {
+  display: flex;
+}
+
+.Link:hover {
+  color: white;
+  background-color: rgb(247, 46, 46);
+  font-weight: 700;
 }
 
 /* rgb(228,228,228) */

@@ -97,7 +97,7 @@ const NativeGenerateAttendanceReport = () => {
     <div className={classes.main}>
       <NativeSideBar />
       <div className={classes.innerContainer}>
-        <p>Generate Native's Attendance Report</p>
+        <p>Generate Your Attendance Report</p>
         {error && <p className={classes.error}>{error}</p>}
         <form action="" onSubmit={submitHandler} className={classes.formInput}>
           <input

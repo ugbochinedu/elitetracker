@@ -10,6 +10,14 @@
 
 .message{
     font-size: 25px;
+    color: green;
+    font-weight: 600;
+    text-align: center;
+    width: 500px;
+}
+
+.error{
+    font-size: 25px;
     color: red;
     font-weight: 600;
     text-align: center;

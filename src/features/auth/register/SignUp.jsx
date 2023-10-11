@@ -235,7 +235,7 @@ const SignUp = () => {
           </div> */}
           <p className={classes.register}>REGISTER</p>
           <form action="" className={classes.form} onSubmit={onSumbitHandler}>
-            {successfulMessage && <h2 className={classes.error}>{successfulMessage}</h2>}
+            {successfulMessage && <h2 className={classes.message}>{successfulMessage}</h2>}
             {error && <h2 className={classes.error}>{error}</h2>}
             <label htmlFor="email">
               Email <span>*</span>
