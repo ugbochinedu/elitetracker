@@ -105,11 +105,13 @@ const ResetDeviceForm = () => {
         <h1>Reset Device</h1>
         <form onSubmit={handleSubmit}>
           {message && <p className={classes.message}>{message}</p>}
+          {errors && <p className={classes.message}>{errors}</p>}
           <div className={classes.divToFlex}>
-            <label htmlFor="">Email <span>*</span></label>
+            <label htmlFor="">
+              Email <span>*</span>
+            </label>
             <div className={classes.input}>
               <input
-                
                 placeholder="Admin semicolon email"
                 type="text"
                 value={adminEmail}
@@ -118,10 +120,11 @@ const ResetDeviceForm = () => {
               {errors.adminEmail && <p>{errors.adminEmail}</p>}
               {/* {ok && <p>{ok}</p>} */}
             </div>
-            <label htmlFor="">Password <span>*</span></label>
+            <label htmlFor="">
+              Password <span>*</span>
+            </label>
             <div className={classes.input}>
               <input
-               
                 placeholder="Admin password"
                 type="password"
                 value={adminPassWord}
