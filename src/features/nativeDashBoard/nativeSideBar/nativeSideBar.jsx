@@ -1,10 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import semiImage from "../../../assests/images/semocolonLogo.jpg";
 import classes from './nativeSideBar.module.css'
 import {faUserCheck, faClockRotateLeft, faRightFromBracket, faChartSimple, faComputer} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const NativeSideBar = () => {
+
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    sessionStorage.clear();
+    navigate("/")
+  };
 
   return (
     <div className={classes.sideBar}>
@@ -41,7 +48,8 @@ const NativeSideBar = () => {
           <div className={classes.LinkLogoutContain}>
             <Link className={classes.Link}>
               <FontAwesomeIcon icon={faRightFromBracket} />
-              <p>Logout</p>
+              <button onClick={handleLogout}>Logout</button>
+              <p></p>
             </Link>
           </div>
         </div>

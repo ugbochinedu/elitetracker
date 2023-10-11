@@ -70,8 +70,8 @@ const NativeGenerateAttendanceReport = () => {
             headers: {
               "Content-Type": "application/json",
             },
-            // body: JSON.stringify(dateDetails),
-            body: dateDetails,
+            body: JSON.stringify(dateDetails),
+            // body: dateDetails,
           }
         );
         const data = await response.json();
