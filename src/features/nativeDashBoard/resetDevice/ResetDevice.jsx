@@ -78,7 +78,7 @@ const ResetDeviceForm = () => {
         
         setTimeout(() => {   
           setMessage("");       
-        }, 5000);
+        }, 2000);
       } else {
         throw new Error("Network Error");
       }
@@ -89,10 +89,16 @@ const ResetDeviceForm = () => {
         // console.log(error.response.data.data);
         if (error.message === "Network Error") {
           // setMessage(error.message);
-          setErrors(error.message);
+          // setErrors(error.message);
+          setTimeout(() => {
+            setErrors(error.message);
+          }, 1700);
         } else {
           // setMessage(error.response.data.data);
-          setErrors(error.response.data.data);
+          // setErrors(error.response.data.data);
+           setTimeout(() => {
+             setErrors(error.response.data.data);
+           }, 1700);
         }
       }
     }
@@ -105,7 +111,7 @@ const ResetDeviceForm = () => {
         <h1>Reset Device</h1>
         <form onSubmit={handleSubmit}>
           {message && <p className={classes.message}>{message}</p>}
-          {errors && <p className={classes.message}>{errors}</p>}
+          {errors && <p className={classes.error}>{errors}</p>}
           <div className={classes.divToFlex}>
             <label htmlFor="">
               Email <span>*</span>

@@ -291,7 +291,7 @@ const TakeAttendance = () => {
             Mark Attendance
           </Button>
           {message && <p className={classes.message}>{message}</p>}
-          {error && <p className={classes.message}>{error}</p>}
+          {error && <p className={classes.error}>{error}</p>}
         </div>
       </div>
     </div>

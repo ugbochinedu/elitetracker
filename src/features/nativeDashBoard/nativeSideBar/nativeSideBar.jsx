@@ -8,10 +8,11 @@ const NativeSideBar = () => {
 
   const navigate = useNavigate()
 
-  const handleLogout = () => {
+  const handleLogout = (e) => {
+    e.preventDefault()
+    navigate("/");
     sessionStorage.clear();
-    navigate("/")
-  };
+   };
 
   return (
     <div className={classes.sideBar}>
